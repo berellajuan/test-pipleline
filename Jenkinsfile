@@ -7,7 +7,7 @@ pipeline { // Definimos el pipeline
     stages { // Definimos las etapas del pipeline
         stage('Clone') { // Etapa de clonación del repositorio
             steps {
-                git branch: "main", url: 'https://github.com/josedom24/jenkins_docker.git' // Clonamos el repositorio de GitHub
+                git branch: "main", url: 'https://github.com/berellajuan/test-pipleline.git' // Clonamos el repositorio de GitHub
             }
         }
         stage('Build') { // Etapa de construcción de la imagen de Docker
