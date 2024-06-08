@@ -13,7 +13,7 @@ pipeline { // Definimos el pipeline
         stage('Build') { // Etapa de construcción de la imagen de Docker
             steps {
                 script {
-                    newApp = docker.build "$IMAGEN:$BUILD_NUMBER" // Construimos la imagen de Docker con un nombre único basado en el número de compilación
+                    newApp = docker.build("cd test-pipleline && $IMAGEN:$BUILD_NUMBER") // Construimos la imagen de Docker con un nombre único basado en el número de compilación
                 }
             }
         }
@@ -39,9 +39,6 @@ pipeline { // Definimos el pipeline
                 }
             }
         }
-
-
-
 
         stage('Clean Up') { // Etapa de limpieza
             steps {
