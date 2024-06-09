@@ -5,9 +5,7 @@ pipeline {
         IMAGEN = "nginx" /* Cambiamos el nombre de la imagen de Docker a nginx */
         USUARIO = 'NEXUS_CREDENTIAL' /* Nombre de usuario de Docker Hub */
     }
-    agent {
-        label 'DOCKER_HOST'
-    }/* Indicamos que el agente puede ser cualquiera de los disponibles, en este caso el que tenga Docker instalado */
+    agent any /* Indicamos que el agente puede ser cualquiera de los disponibles, en este caso el que tenga Docker instalado */
     stages { /* Definimos las etapas del pipeline */
         stage('Clone') { /* Etapa de clonación del repositorio */
             steps {
