@@ -23,7 +23,7 @@ pipeline {
         stage('Test') { /* Etapa de pruebas */
             steps {
                 script {
-                    docker.image("$IMAGEN:$BUILD_NUMBER").inside('-u root') { /* Ejecutamos un contenedor de Docker con la imagen construida */
+                    docker.image("juanbe96/$IMAGEN:$BUILD_NUMBER").inside('-u root') { /* Ejecutamos un contenedor de Docker con la imagen construida */
                            sh 'nginx -v' /* Cambiamos el comando a 'nginx -v' para verificar la versión de nginx dentro del contenedor */
                         }
                     }
