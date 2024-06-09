@@ -7,7 +7,11 @@ pipeline {
     }
     agent any /* Indicamos que el agente puede ser cualquiera de los disponibles, en este caso el que tenga Docker instalado */
     stages { /* Definimos las etapas del pipeline */
-
+        stage('Clone') { /* Etapa de clonación del repositorio */
+            steps {
+                git branch: "main", url: 'https://github.com/berellajuan/test-pipleline.git' /* Clonamos el repositorio de GitHub */
+            }
+        }
         stage('Build') { /* Etapa de construcción de la imagen de Docker */
             steps {
                 script {
@@ -20,7 +24,7 @@ pipeline {
             steps {
                 script {
                     docker.image("$IMAGEN:$BUILD_NUMBER").inside('-u root') { /* Ejecutamos un contenedor de Docker con la imagen construida */
-                           sh 'echo Test COMPLETE' /* Cambiamos el comando a 'nginx -v' para verificar la versión de nginx dentro del contenedor */
+                           sh 'nginx -v' /* Cambiamos el comando a 'nginx -v' para verificar la versión de nginx dentro del contenedor */
                         }
                     }
             }
