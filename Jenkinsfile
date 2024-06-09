@@ -35,6 +35,7 @@ pipeline {
                 script {
                     docker.withRegistry( '', USUARIO ) { /* Autenticamos con Docker Hub utilizando el nombre de usuario */
                         newApp.push() /* Subimos la imagen de Docker al repositorio de Docker Hub */
+                    }
                 }
             }
         }
@@ -42,7 +43,7 @@ pipeline {
         stage('Clean Up') { /* Etapa de limpieza */
             steps {
                 sh "docker rmi juanbe96/$IMAGEN:$BUILD_NUMBER" /* Eliminamos la imagen de Docker localmente */
-                }
+            }
         }
     }
 }
