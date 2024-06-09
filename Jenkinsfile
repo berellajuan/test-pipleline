@@ -33,11 +33,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialId: 'DOCKERHUB_CREDENTIAL' , usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        docker.withRegistry('', "$USERNAME:$PASSWORD") {
-                            newApp.push()
-                        }
-                    }
+                    docker.withRegistry( '', USUARIO ) { /* Autenticamos con Docker Hub utilizando el nombre de usuario */
+                        newApp.push() /* Subimos la imagen de Docker al repositorio de Docker Hub */
                 }
             }
         }
