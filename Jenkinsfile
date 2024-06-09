@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'DOCKERHUB_CREDENTIAL' , usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        docker.withRegistry('', "juanbe96/$USERNAME:$PASSWORD") {
+                        docker.withRegistry('', "$USERNAME:$PASSWORD") {
                             newApp.push()
                         }
                     }
@@ -44,7 +44,7 @@ pipeline {
         
         stage('Clean Up') { /* Etapa de limpieza */
             steps {
-                sh "docker rmi $IMAGEN:$BUILD_NUMBER" /* Eliminamos la imagen de Docker localmente */
+                sh "docker rmi juanbe96/$IMAGEN:$BUILD_NUMBER" /* Eliminamos la imagen de Docker localmente */
                 }
         }
     }
