@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'NEXUS_CREDENTIAL' , usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        docker.withRegistry('https://localhost:8083', "$USERNAME:$PASSWORD") {
+                        docker.withRegistry('http://localhost:8083', "$USERNAME:$PASSWORD") {
                             newApp.push()
                         }
                     }
