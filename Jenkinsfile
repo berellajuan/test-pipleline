@@ -1,7 +1,7 @@
 pipeline { // Definimos el pipeline
     environment { // Definimos las variables de entorno
         IMAGEN = "nginx" // Cambiamos el nombre de la imagen de Docker a nginx
-        USUARIO = 'USER_DOCKERHUB' // Nombre de usuario de Docker Hub
+        USUARIO = 'NEXUS_CREDENTIAL' // Nombre de usuario de Docker Hub
     }
     agent any // Indicamos que el agente puede ser cualquiera de los disponibles, en este caso el que tenga Docker instalado
     stages { // Definimos las etapas del pipeline
@@ -13,7 +13,7 @@ pipeline { // Definimos el pipeline
         stage('Build') { // Etapa de construcción de la imagen de Docker
             steps {
                 script {
-                    newApp = docker.build("cd test-pipleline && $IMAGEN:$BUILD_NUMBER") // Construimos la imagen de Docker con un nombre único basado en el número de compilación
+                    newApp = docker.build "$IMAGEN:$BUILD_NUMBER" // Construimos la imagen de Docker con un nombre único basado en el número de compilación
                 }
             }
         }
@@ -39,7 +39,7 @@ pipeline { // Definimos el pipeline
                 }
             }
         }
-
+        
         stage('Clean Up') { // Etapa de limpieza
             steps {
                 sh "docker rmi $IMAGEN:$BUILD_NUMBER" // Eliminamos la imagen de Docker localmente
