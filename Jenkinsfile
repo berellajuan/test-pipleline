@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'DOCKERHUB_CREDENTIAL' , usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        docker.withRegistry('', "$USERNAME:$PASSWORD") {
+                        docker.withRegistry('', "juanbe96/$USERNAME:$PASSWORD") {
                             newApp.push()
                         }
                     }
